@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { calcRem } from 'theme';
 
-const Spinner = () => {
+const Loader = () => {
   return (
-    <StyledSpinner>
+    <StyledLoader>
       <img src="spinner.svg" alt="로딩중" />
-    </StyledSpinner>
+    </StyledLoader>
   );
 };
 
-const StyledSpinner = styled.div`
+const StyledLoader = styled.div`
   max-width: ${calcRem(768)};
   margin: 0 auto;
   text-align: center;
@@ -18,4 +18,4 @@ const StyledSpinner = styled.div`
   z-index: 1000;
 `;
 
-export default Spinner;
+export default Loader;

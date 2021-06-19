@@ -13,8 +13,8 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCartItems({ id: 'purple_16', pw: 'purple_16' }));
-  }, []);
+    dispatch(getCartItems());
+  }, [count]);
 
   return (
     <HeaderStyle>

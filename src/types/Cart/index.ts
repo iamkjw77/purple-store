@@ -24,3 +24,8 @@ export type AddCartType = {
   pog: number;
   qty: number;
 };
+
+export type UpdateCartType = {
+  id: number;
+  qty: number;
+};

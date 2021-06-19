@@ -1,4 +1,8 @@
+// import { addCartItem } from 'apis/cart';
 import Icon from 'components/Icon';
+import { getCartItems } from 'modules/cart/cartSlice';
+import { addCartItem } from 'modules/cart/cartSlice';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { calcInterval, calcRem, colors, fontSize } from 'theme';
 import { Product } from 'types/Product';
@@ -10,17 +14,26 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ product, setIsShow }: ProductCardProps) => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    setIsShow(true);
+    dispatch(addCartItem({ pog: product.id, qty: 1 }));
+  };
+
   return (
-    <StyledFigure>
-      <div>
-        <img src={product.image} alt="" />
-        <button className="cart" onClick={() => setIsShow(true)}>
-          <Icon name="ShoppingCart" size={30} />
-        </button>
-      </div>
-      <figcaption>{product.name}</figcaption>
-      <span>{numberWithCommas(product.price)}원</span>
-    </StyledFigure>
+    <>
+      <StyledFigure>
+        <div>
+          <img src={product.image} alt={product.name} />
+          <button className="cart" onClick={handleClick}>
+            <Icon name="ShoppingCart" size={30} />
+          </button>
+        </div>
+        <figcaption>{product.name}</figcaption>
+        <span>{numberWithCommas(product.price)}원</span>
+      </StyledFigure>
+    </>
   );
 };
 

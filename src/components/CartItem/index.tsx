@@ -4,8 +4,11 @@ import { calcInterval, calcRem, colors, fontSize } from 'theme';
 import ProductImg from 'components/ProductImg';
 import { CartItemType } from 'types/Cart';
 import { numberWithCommas } from 'utils/numberWithCommas';
-import { useState } from 'react';
 import { calcPoint } from 'utils/calcPoint';
+import { useDispatch } from 'react-redux';
+import { deleteCartItem, updateCartItem } from 'modules/cart/cartSlice';
+import { debounce } from 'utils/debounce';
+import { useState } from 'react';
 
 type CartItemProps = {
   cartItem: CartItemType;
@@ -13,13 +16,35 @@ type CartItemProps = {
 
 const CartItem = ({ cartItem }: CartItemProps) => {
   const [count, setCount] = useState(cartItem.qty);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(deleteCartItem(cartItem.id));
+  };
+
+  const onDecrease = () => {
+    if (count === 1) return;
+    setCount(cartItem.qty - 1);
+    setTimeout(() => {
+      dispatch(updateCartItem({ id: cartItem.id, qty: cartItem.qty - 1 }));
+    }, 300);
+  };
+
+  const onIncrease = () => {
+    setCount(cartItem.qty + 1);
+    setTimeout(() => {
+      dispatch(updateCartItem({ id: cartItem.id, qty: cartItem.qty + 1 }));
+    }, 300);
+  };
 
   return (
     <StyledCartItem>
       <div className="title-container">
         <CheckBox />
         <span className="product-name">{cartItem.pog.name}</span>
-        <button className="delete-btn">삭제</button>
+        <button className="delete-btn" onClick={handleClick}>
+          삭제
+        </button>
       </div>
       <div className="product-info-container">
         <ProductImg />
@@ -29,9 +54,13 @@ const CartItem = ({ cartItem }: CartItemProps) => {
             최대 {calcPoint(cartItem.pog.price, cartItem.qty)}원 적립예정
           </span>
           <div className="count-container">
-            <button className="count-btn">-</button>
+            <button className="count-btn" onClick={debounce(onDecrease, 400)}>
+              -
+            </button>
             <input type="input" readOnly value={count} />
-            <button className="count-btn">+</button>
+            <button className="count-btn" onClick={debounce(onIncrease, 400)}>
+              +
+            </button>
           </div>
         </div>
       </div>

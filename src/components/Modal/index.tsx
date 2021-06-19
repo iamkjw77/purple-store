@@ -3,26 +3,31 @@ import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 import Button from 'components/Button';
 import ProgressBar from 'components/ProgressBar/index';
-import Tooltip from './../Tooltip/index';
+import Tooltip from 'components/Tooltip/index';
 import { useRouter } from 'next/router';
+import { useTypedSelector } from '../../../pages/_app';
+import { calcTotalPrice } from 'utils/calcTotalPrice';
+import calcBenefit from 'utils/calcBenefit';
 
 type ModalProps = {
   setIsShow: (boolean) => void;
 };
 
 const Modal = ({ setIsShow }: ModalProps) => {
+  const { data } = useTypedSelector((state) => state.cart);
   const router = useRouter();
   const goLink = () => {
     setIsShow(false);
     router.push('/cart');
   };
+  const totalPrice = calcTotalPrice(data);
 
   return (
     <>
-      <ModalStyle aria-modal={true}>
+      <ModalStyle role="dialog" aria-modal={true}>
         <h1>정기 배송 장바구니에 담겼습니다.</h1>
-        <Tooltip price={55000} />
-        <ProgressBar price={55000} />
+        <Tooltip price={calcBenefit(totalPrice)} />
+        <ProgressBar price={totalPrice} />
 
         <div className="button-container">
           <Button

@@ -7,37 +7,48 @@ import { CartItemType } from 'types/Cart';
 import { calcTotalPrice } from 'utils/calcTotalPrice';
 import { numberWithCommas } from 'utils/numberWithCommas';
 import { calcShoppingFee } from 'utils/calcShoppingFee';
+import { calcShippingFeeCondition } from 'utils/calcShippingFeeCondition';
+import { calcTotal } from 'utils/calcTotal';
 
 type CartListProps = {
   cartItems: CartItemType[];
+  count: number;
 };
 
-const CartList = ({ cartItems }: CartListProps) => {
+const CartList = ({ cartItems, count }: CartListProps) => {
   const totalPrice = calcTotalPrice(cartItems);
+  const shippingFee = calcShoppingFee(totalPrice);
 
   return (
     <Container>
       <ControlBar />
-      <ul>
-        {cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} cartItem={cartItem} />
-        ))}
-      </ul>
-      {/* <Empty /> */}
-      <dl>
-        <dt>총 상품가격</dt>
-        <dd>{numberWithCommas(totalPrice)}원</dd>
-      </dl>
-      <dl>
-        <dt>총 배송비</dt>
-        <dd>{calcShoppingFee(totalPrice)}원</dd>
-      </dl>
-      <span className="shippingFee-info">(6100원 추가시 무료배송)</span>
-      <dl className="total-container">
-        <dt className="total-title">합계</dt>
-        <dd className="total-price">84,000원</dd>
-      </dl>
-      <button className="purchase-btn">구매하기 (2)</button>
+      {!count ? (
+        <Empty />
+      ) : (
+        <>
+          <ul>
+            {cartItems.map((cartItem) => (
+              <CartItem key={cartItem.id} cartItem={cartItem} />
+            ))}
+          </ul>
+          <dl>
+            <dt>총 상품가격</dt>
+            <dd>{numberWithCommas(totalPrice)}원</dd>
+          </dl>
+          <dl>
+            <dt>총 배송비</dt>
+            <dd>{numberWithCommas(shippingFee)}원</dd>
+          </dl>
+          <span className="shippingFee-info">
+            ({calcShippingFeeCondition(totalPrice)}원 추가시 무료배송)
+          </span>
+          <dl className="total-container">
+            <dt className="total-title">합계</dt>
+            <dd className="total-price">{calcTotal(totalPrice, shippingFee)}원</dd>
+          </dl>
+          <button className="purchase-btn">구매하기 ({count})</button>
+        </>
+      )}
     </Container>
   );
 };

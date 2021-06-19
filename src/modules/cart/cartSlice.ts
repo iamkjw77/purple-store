@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { CartPage, CartPageState, UserLogin } from 'types/Cart';
+import { AddCartType, CartItemType, CartPage, CartPageState } from 'types/Cart';
 
 const initialState: CartPageState = {
   loading: false,
@@ -13,7 +13,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    getCartItems(state: CartPageState, action: PayloadAction<UserLogin>) {
+    getCartItems(state: CartPageState) {
       state.loading = true;
     },
     getCartItemsSuccess(state: CartPageState, action: PayloadAction<CartPage>) {
@@ -25,9 +25,28 @@ const cartSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+
+    addCartItem(state: CartPageState, action: PayloadAction<AddCartType>) {
+      state.loading = true;
+    },
+    addCartItemSuccess(state: CartPageState, action: PayloadAction<CartItemType>) {
+      state.loading = false;
+      state.data = state.data.concat(action.payload);
+    },
+    addCartItemError(state: CartPageState, action: PayloadAction<AxiosError>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 const { reducer, actions } = cartSlice;
-export const { getCartItems, getCartItemsSuccess, getCartItemsError } = actions;
+export const {
+  getCartItems,
+  getCartItemsSuccess,
+  getCartItemsError,
+  addCartItem,
+  addCartItemSuccess,
+  addCartItemError,
+} = actions;
 export default reducer;

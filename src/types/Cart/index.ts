@@ -20,7 +20,7 @@ export type CartItemType = {
   qty: number;
 };
 
-export type UserLogin = {
-  id: string;
-  pw: string;
+export type AddCartType = {
+  pog: number;
+  qty: number;
 };

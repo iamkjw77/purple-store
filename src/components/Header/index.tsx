@@ -3,12 +3,19 @@ import styled from 'styled-components';
 import { calcRem, colors } from 'theme';
 import Logo from 'components/Logo';
 import CartBtn from 'components/CartBtn';
+import { useTypedSelector } from '../../../pages/_app';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getCartItems } from 'modules/cart/cartSlice';
 
-type HeaderProps = {
-  count: number;
-};
+const Header = () => {
+  const { count } = useTypedSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-const Header = ({ count }: HeaderProps) => {
+  useEffect(() => {
+    dispatch(getCartItems({ id: 'purple_16', pw: 'purple_16' }));
+  }, []);
+
   return (
     <HeaderStyle>
       <div>

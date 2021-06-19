@@ -1,14 +1,21 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { calcInterval, calcRem, colors, fontSize } from 'theme';
 
 const Empty = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/');
+  };
+
   return (
     <Container>
       <img
         src="https://s3-purplestore.s3.ap-northeast-2.amazonaws.com/assets/img_cart_empty.png"
         alt="빈 장바구니"
       />
-      <button>퍼플스토어 둘러보기</button>
+      <button onClick={handleClick}>퍼플스토어 둘러보기</button>
     </Container>
   );
 };

@@ -1,16 +1,18 @@
+import benefitCriteria from 'constant/benefitCriteria';
+
 export const calcQuarter = (price: number): number => {
-  if (price > 0 && price < 50000) return 1;
-  if (price === 50000) return 2;
+  if (price > 0 && price < benefitCriteria.STAGE_01) return 1;
+  if (price === benefitCriteria.STAGE_01) return 2;
 
-  if (price > 50000 && price < 100000) return 3;
-  if (price === 100000) return 4;
+  if (price > benefitCriteria.STAGE_01 && price < benefitCriteria.STAGE_02) return 3;
+  if (price === benefitCriteria.STAGE_02) return 4;
 
-  if (price > 100000 && price < 200000) return 5;
-  if (price >= 200000) return 6;
+  if (price > benefitCriteria.STAGE_02 && price < benefitCriteria.STAGE_03) return 5;
+  if (price >= benefitCriteria.STAGE_03) return 6;
 };
 
 export const calcMargin = (price: number): string => {
-  if (price > 0 && price < 50000) return '15px';
-  if (price >= 50000 && price < 100000) return '107px';
-  if (price >= 100000 && price < 200000) return '179px';
+  if (price > 0 && price < benefitCriteria.STAGE_01) return '15px';
+  if (price >= benefitCriteria.STAGE_01 && price < benefitCriteria.STAGE_02) return '107px';
+  if (price >= benefitCriteria.STAGE_02 && price < benefitCriteria.STAGE_03) return '179px';
 };

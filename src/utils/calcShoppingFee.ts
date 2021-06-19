@@ -1,6 +1,6 @@
-import { numberWithCommas } from './numberWithCommas';
+import shoppingFee from 'constant/shoppingFee';
 
-export const calcShoppingFee = (totalPrice: number): string | number => {
-  if (totalPrice >= 30000) return 0;
-  else return numberWithCommas(3000);
+export const calcShoppingFee = (totalPrice: number): number => {
+  if (totalPrice >= shoppingFee.FREE_SHIPPING_TERMS) return 0;
+  else return shoppingFee.DELIVERY_CHARGE;
 };

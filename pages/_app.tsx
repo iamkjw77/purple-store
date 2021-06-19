@@ -21,7 +21,7 @@ export const useTypedSelector: TypedUseSelectorHook<RootReducer> = useSelector;
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <Header count={2} />
+      <Header />
       <GlobalStyle />
       <Component {...pageProps} />
       <div id="modal"></div>

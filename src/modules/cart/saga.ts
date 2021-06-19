@@ -22,17 +22,17 @@ function* getCartItemsSaga() {
 }
 
 // 장바구니 아이템 추가
-// function* addItemSaga(action: PayloadAction<AddCartType>) {
-//   try {
-//     const cartItem: CartItemType = yield call(cartAPI.addCartItem, action.payload);
-//     yield put(addCartItemSuccess(cartItem));
-//   } catch (error) {
-//     yield put(addCartItemError(error));
-//   }
-// }
+function* addItemSaga(action: PayloadAction<AddCartType>) {
+  try {
+    const cartItem: CartItemType = yield call(cartAPI.addCartItem, action.payload);
+    yield put(addCartItemSuccess(cartItem));
+  } catch (error) {
+    yield put(addCartItemError(error));
+  }
+}
 
 // 모니터링 함수
 export function* cartSaga() {
   yield takeEvery(getCartItems.type, getCartItemsSaga);
-  // yield takeEvery(addCartItem.type, addItemSaga);
+  yield takeEvery(addCartItem.type, addItemSaga);
 }

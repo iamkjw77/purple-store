@@ -1,30 +1,29 @@
 import Head from 'next/head';
 import CartList from 'components/CartList';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getCartItems } from 'modules/cart/cartSlice';
-import { useTypedSelector } from './_app';
-import Spinner from 'components/Spinner';
-import Error from 'components/Error/index';
+import { CartPage } from 'types/Cart';
+import axios from 'axios';
+import { InferGetStaticPropsType } from 'next';
 
-export default function Cart() {
-  const { loading, data, error, count } = useTypedSelector((state) => state.cart);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCartItems());
-  }, []);
-
-  if (!data || loading) return <Spinner />;
-  if (error) return <Error />;
-
+export default function Cart({ cart }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
         <title>장바구니</title>
         <meta name="description" content="장바구니" />
       </Head>
-      <CartList cartItems={data} count={count} />
+      <CartList cartItems={cart.results} count={cart.count} />
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data: cart } = await axios.get<CartPage>('https://task.purplesto.re/cart-items', {
+    auth: {
+      username: 'purple_16',
+      password: 'purple_16',
+    },
+  });
+  return {
+    props: { cart },
+  };
+};

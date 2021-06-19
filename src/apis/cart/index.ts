@@ -11,7 +11,7 @@ export const getCartItems = async () => {
   return cartItems;
 };
 
-export const addCartItem = async (id, qty) => {
+export const addCartItem = async ({ pog, qty }) => {
   const { data: cartItem } = await axios.post<CartItemType>(
     'https://task.purplesto.re/cart-items',
     {
@@ -20,7 +20,7 @@ export const addCartItem = async (id, qty) => {
         password: 'purple_16',
       },
       params: {
-        pog: id,
+        pog,
         qty,
       },
     },

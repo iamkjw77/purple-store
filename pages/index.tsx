@@ -2,15 +2,18 @@ import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ProductCardList from 'components/ProductCardList/index';
-import { clearProducts, getProducts } from 'modules/product/productSlice';
+import { clearProducts, getProducts, initializeProducts } from 'modules/product/productSlice';
 import { useTypedSelector } from './_app';
 import { debounce } from 'utils/debounce';
 import Spinner from 'components/Spinner';
 import Error from 'components/Error/index';
 import Modal from './../src/components/Modal/index';
 import ModalContainer from './../src/utils/portal';
+import axios from 'axios';
+import { ProductPage } from 'types/Product';
+import { InferGetStaticPropsType } from 'next';
 
-export default function Home() {
+export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { loading, data, error, count } = useTypedSelector((state) => state.product);
   const [isShow, setIsShow] = useState(false);
   const dispatch = useDispatch();
@@ -27,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!data) {
-      dispatch(getProducts(1));
+      dispatch(initializeProducts(products));
     }
     return () => {
       dispatch(clearProducts());
@@ -76,3 +79,12 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const { data: products } = await axios.get<ProductPage>('https://task.purplesto.re/products');
+  return {
+    props: {
+      products,
+    },
+  };
+};

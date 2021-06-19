@@ -19,8 +19,8 @@ const Modal = ({ setIsShow }: ModalProps) => {
 
   return (
     <>
-      <ModalStyle>
-        <div className="text">정기 배송 장바구니에 담겼습니다.</div>
+      <ModalStyle aria-modal={true}>
+        <h1>정기 배송 장바구니에 담겼습니다.</h1>
         <Tooltip price={55000} />
         <ProgressBar price={55000} />
 
@@ -55,7 +55,7 @@ const ModalStyle = styled.div`
   padding: ${calcRem(100)};
   border-radius: 10px;
 
-  .text {
+  h1 {
     font-size: ${fontSize.title};
     font-weight: bold;
     margin-bottom: ${calcRem(40)};

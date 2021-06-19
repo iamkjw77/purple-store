@@ -13,6 +13,9 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
+    initializeProducts(state:ProductPageState, action:PayloadAction<ProductPage>){
+      state.data = action.payload.results;
+    },
     getProducts(state: ProductPageState, action: PayloadAction<number>) {
       state.loading = true;
     },
@@ -34,5 +37,5 @@ const productSlice = createSlice({
 });
 
 const { reducer, actions } = productSlice;
-export const { getProducts, getProductsSuccess, getProductsError, clearProducts } = actions;
+export const { initializeProducts, getProducts, getProductsSuccess, getProductsError, clearProducts } = actions;
 export default reducer;

@@ -2,23 +2,35 @@ import CheckBox from 'components/CheckBox';
 import styled from 'styled-components';
 import { calcInterval, calcRem, colors, fontSize } from 'theme';
 import ProductImg from 'components/ProductImg';
+import { CartItemType } from 'types/Cart';
+import { numberWithCommas } from 'utils/numberWithCommas';
+import { useState } from 'react';
+import { calcPoint } from 'utils/calcPoint';
 
-const CartItem = () => {
+type CartItemProps = {
+  cartItem: CartItemType;
+};
+
+const CartItem = ({ cartItem }: CartItemProps) => {
+  const [count, setCount] = useState(cartItem.qty);
+
   return (
     <StyledCartItem>
       <div className="title-container">
         <CheckBox />
-        <span className="product-name">[빈티지] DOG 오븐프레쉬 치킨,칠면조 1kg</span>
+        <span className="product-name">{cartItem.pog.name}</span>
         <button className="delete-btn">삭제</button>
       </div>
       <div className="product-info-container">
         <ProductImg />
         <div>
-          <span className="price">2900원</span>
-          <span className="point">최대 29원 적립예정</span>
+          <span className="price">{numberWithCommas(cartItem.pog.price)}원</span>
+          <span className="point">
+            최대 {calcPoint(cartItem.pog.price, cartItem.qty)}원 적립예정
+          </span>
           <div className="count-container">
             <button className="count-btn">-</button>
-            <input type="input" readOnly />
+            <input type="input" readOnly value={count} />
             <button className="count-btn">+</button>
           </div>
         </div>

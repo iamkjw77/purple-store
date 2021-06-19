@@ -3,24 +3,34 @@ import { calcInterval, calcRem, colors, fontSize } from 'theme';
 import Empty from 'components/Empty';
 import ControlBar from 'components/ControlBar';
 import CartItem from 'components/CartItem';
+import { CartItemType } from 'types/Cart';
+import { calcTotalPrice } from 'utils/calcTotalPrice';
+import { numberWithCommas } from 'utils/numberWithCommas';
+import { calcShoppingFee } from 'utils/calcShoppingFee';
 
-const CartList = () => {
+type CartListProps = {
+  cartItems: CartItemType[];
+};
+
+const CartList = ({ cartItems }: CartListProps) => {
+  const totalPrice = calcTotalPrice(cartItems);
+
   return (
     <Container>
       <ControlBar />
       <ul>
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {cartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} cartItem={cartItem} />
+        ))}
       </ul>
       {/* <Empty /> */}
       <dl>
         <dt>총 상품가격</dt>
-        <dd>84000원</dd>
+        <dd>{numberWithCommas(totalPrice)}원</dd>
       </dl>
       <dl>
         <dt>총 배송비</dt>
-        <dd>0원</dd>
+        <dd>{calcShoppingFee(totalPrice)}원</dd>
       </dl>
       <span className="shippingFee-info">(6100원 추가시 무료배송)</span>
       <dl className="total-container">

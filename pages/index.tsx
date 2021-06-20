@@ -15,7 +15,7 @@ import Loader from 'components/Loader';
 import Modal from 'components/Modal';
 import AddCartModalContents from 'components/AddCartModalContents';
 import DuplicateProductModalContents from 'components/DuplicateProductModalContents';
-import { useRouter } from 'next/router';
+import ErrorModalContents from 'components/ErrorModalContents/index';
 
 export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
   const {
@@ -27,7 +27,6 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
   const [isShow, setIsShow] = useState(false);
   const dispatch = useDispatch();
   const pageRef = useRef(2);
-  const router = useRouter();
 
   useSrcoll(pageRef.current);
   useStopSroll(isShow);
@@ -41,10 +40,6 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
   }, []);
 
   if (!data) return <Loader />;
-  if (productError || cartError === 500) {
-    alert('에러가 발생했습니다. 페이지를 새로고침 합니다.');
-    router.reload();
-  }
 
   return (
     <>
@@ -73,6 +68,17 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
             </Modal>
           </ModalContainer>
         )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {(isShow && productError) ||
+          (cartError === 500 && (
+            <ModalContainer id="modal">
+              <Modal setIsShow={setIsShow}>
+                <ErrorModalContents />
+              </Modal>
+            </ModalContainer>
+          ))}
       </AnimatePresence>
     </>
   );

@@ -9,8 +9,11 @@ import { numberWithCommas } from 'utils/numberWithCommas';
 import Button from 'components/Button';
 
 type ProductInfo = {
+  /** 제품 id */
   id: number;
+  /** 제품 가격 */
   price: number;
+  /** 제품 수량 */
   qty: number;
 };
 

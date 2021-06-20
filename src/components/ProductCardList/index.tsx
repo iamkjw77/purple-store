@@ -5,7 +5,9 @@ import { Product } from 'types/Product';
 import ProductCard from 'components/ProductCard';
 
 type ProductCardList = {
+  /** 전체 제품 배열 */
   products: Product[];
+  /** 모달 가시 여부 업데이트 함수*/
   setIsShow: (boolean) => void;
 };
 

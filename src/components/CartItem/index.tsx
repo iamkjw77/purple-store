@@ -9,6 +9,7 @@ import Button from 'components/Button';
 import ProductInfo from 'components/ProductInfo';
 
 type CartItemProps = {
+  /** 카트 아이템 정보 */
   cartItem: CartItemType;
 };
 

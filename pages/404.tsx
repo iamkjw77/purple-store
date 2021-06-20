@@ -53,6 +53,15 @@ const StyledContainer = styled.div`
     display: block;
     margin: ${calcRem(30)} auto;
   }
+
+  button {
+    transition: all 0.2s ease-in;
+  }
+
+  button:hover {
+    background-color: ${colors.light_purple};
+    border: 2px solid ${colors.light_purple};
+  }
 `;
 
 StyledContainer.displayName = 'StyledContainer';

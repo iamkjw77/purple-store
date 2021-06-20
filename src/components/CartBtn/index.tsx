@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { calcInterval, colors, fontSize } from 'theme';
 
 type CartBtnProps = {
+  /** 장바구니 아이템 갯수 */
   count: number;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -38,5 +39,7 @@ const StyledButton = styled.button<{ count: number }>`
     font-weight: bold;
   }
 `;
+
+StyledButton.displayName = 'StyledButton';
 
 export default CartBtn;

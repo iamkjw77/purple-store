@@ -4,6 +4,7 @@ import { calcRem, colors, fontSize } from 'theme';
 import ModalButtons from 'components/ModalButtons';
 
 type DuplicateProductModalContentsProps = {
+  /** 모달 창 가시여부 업데이트 함수 */
   setIsShow: (boolean) => void;
 } & HTMLMotionProps<'div'>;
 
@@ -40,5 +41,7 @@ const StyledDuplicateModal = styled(motion.div)`
     margin-bottom: ${calcRem(40)};
   }
 `;
+
+StyledDuplicateModal.displayName = 'StyledDuplicateModal';
 
 export default DuplicateProductModalContents;

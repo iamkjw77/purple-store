@@ -59,4 +59,6 @@ const HeaderStyle = styled.header`
   }
 `;
 
+HeaderStyle.displayName = 'HeaderStyle';
+
 export default Header;

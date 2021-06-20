@@ -10,7 +10,9 @@ import KeyValueText from 'components/KeyValueText/index';
 import Button from 'components/Button';
 
 type CartItemPriceInfoProps = {
+  /** 카트 전체 아이템 배열 */
   cartItems: CartItemType[];
+  /** 카트 아이템 전체 갯수 */
   count: number;
 };
 

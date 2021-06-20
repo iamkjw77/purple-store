@@ -8,6 +8,7 @@ import ProgressBar from 'components/ProgressBar/index';
 import ModalButtons from 'components/ModalButtons/index';
 
 type AddCartModalContentsProps = {
+  /** 모달창 가시여부 업데이트 함수 */
   setIsShow: (boolean) => void;
 } & HTMLMotionProps<'div'>;
 
@@ -49,5 +50,7 @@ const StyledModal = styled(motion.div)`
     margin-bottom: ${calcRem(40)};
   }
 `;
+
+StyledModal.displayName = 'StyledModal';
 
 export default AddCartModalContents;

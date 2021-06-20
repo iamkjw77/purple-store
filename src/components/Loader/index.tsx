@@ -20,4 +20,6 @@ const StyledLoader = styled.div`
   z-index: 1000;
 `;
 
+StyledLoader.displayName = 'StyledLoader';
+
 export default Loader;

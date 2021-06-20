@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 
 type CheckBox = {
+  /** 체크박스 레이블 */
   label?: string;
 };
 
@@ -44,5 +45,7 @@ const StyledCheckBox = styled.label`
     color: ${colors.purple};
   }
 `;
+
+StyledCheckBox.displayName = 'StyledCheckBox';
 
 export default CheckBox;

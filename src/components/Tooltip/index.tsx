@@ -4,6 +4,7 @@ import calcBenefit from 'utils/calcBenefit';
 import { calcMargin } from 'utils/calcQuarter';
 
 type TooltipProps = {
+  /** 총 가격 */
   price: number;
 };
 
@@ -31,5 +32,7 @@ const TooltipContainer = styled.div<TooltipProps>`
     color: ${colors.purple};
   }
 `;
+
+TooltipContainer.displayName = 'TooltipContainer';
 
 export default Tooltip;

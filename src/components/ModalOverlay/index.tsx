@@ -3,6 +3,7 @@ import { colors } from 'theme';
 import { HTMLMotionProps, motion } from 'framer-motion';
 
 type ModalOverlayProps = {
+  /** 모달 가시 여부 업데이트 함수*/
   setIsShow: (boolean) => void;
 } & HTMLMotionProps<'div'>;
 
@@ -20,5 +21,7 @@ const OverlayStyle = styled(motion.div)`
   background-color: ${colors.black};
   opacity: 0.7;
 `;
+
+OverlayStyle.displayName = 'OverlayStyle';
 
 export default ModalOverlay;

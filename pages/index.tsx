@@ -12,25 +12,28 @@ import useSrcoll from 'hooks/useSrcoll';
 import ModalContainer from 'utils/portal';
 import ProductCardList from 'components/ProductCardList';
 import Loader from 'components/Loader';
-import Error from 'components/Error';
 import Modal from 'components/Modal';
 import AddCartModalContents from 'components/AddCartModalContents';
 import DuplicateProductModalContents from 'components/DuplicateProductModalContents';
+import { useRouter } from 'next/router';
 
 export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { loading, data, error: productError } = useTypedSelector((state) => state.product);
-  const { error: cartError } = useTypedSelector((state) => state.cart);
+  const {
+    loading: productLoading,
+    data,
+    error: productError,
+  } = useTypedSelector((state) => state.product);
+  const { loading: cartLoading, error: cartError } = useTypedSelector((state) => state.cart);
   const [isShow, setIsShow] = useState(false);
   const dispatch = useDispatch();
   const pageRef = useRef(2);
+  const router = useRouter();
 
   useSrcoll(pageRef.current);
   useStopSroll(isShow);
 
   useEffect(() => {
-    if (!data) {
-      dispatch(initializeProducts(products));
-    }
+    dispatch(initializeProducts(products));
 
     return () => {
       dispatch(clearProducts());
@@ -38,7 +41,10 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
   }, []);
 
   if (!data) return <Loader />;
-  if (productError || cartError === 500) return <Error />;
+  if (productError || cartError === 500) {
+    alert('에러가 발생했습니다. 페이지를 새로고침 합니다.');
+    router.reload();
+  }
 
   return (
     <>
@@ -47,10 +53,10 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
         <meta name="description" content="퍼플스토어" />
       </Head>
       <ProductCardList products={data} setIsShow={setIsShow} />
-      {loading && <Loader />}
+      {(productLoading || cartLoading) && <Loader />}
 
       <AnimatePresence>
-        {isShow && !cartError && (
+        {isShow && !cartError && !cartLoading && (
           <ModalContainer id="modal">
             <Modal setIsShow={setIsShow}>
               <AddCartModalContents setIsShow={setIsShow} />
@@ -60,7 +66,7 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
       </AnimatePresence>
 
       <AnimatePresence>
-        {isShow && cartError === 400 && (
+        {isShow && cartError === 400 && !cartLoading && (
           <ModalContainer id="modal">
             <Modal setIsShow={setIsShow}>
               <DuplicateProductModalContents setIsShow={setIsShow} />

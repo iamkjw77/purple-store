@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 
 type ButtonProps = {
+  /** 버튼 내용 */
   children: React.ReactNode;
+  /** 버튼 배경색 */
   bgColor: string;
+  /** 버튼 글자색 */
   color: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -31,5 +34,7 @@ const ButtonStyle = styled.button<ButtonStyle>`
   font-weight: bold;
   border-radius: 10px;
 `;
+
+ButtonStyle.displayName = 'ButtonStyle';
 
 export default Button;

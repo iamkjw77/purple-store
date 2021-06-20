@@ -35,4 +35,6 @@ const StyledControlBar = styled.div`
   }
 `;
 
+StyledControlBar.displayName = 'StyledControlBar';
+
 export default ControlBar;

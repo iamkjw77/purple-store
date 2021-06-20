@@ -5,6 +5,7 @@ import { make05IconName, make10IconName, make20IconName } from 'utils/makeName';
 import Icon from 'components/Icon';
 
 type ProgressBarType = {
+  /** 총 가격 */
   price: number;
 };
 

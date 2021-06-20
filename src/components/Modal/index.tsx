@@ -1,7 +1,9 @@
 import ModalOverlay from 'components/ModalOverlay';
 
 type ModalProps = {
+  /** 모달 내용 */
   children: React.ReactNode;
+  /** 모달 가시 여부 업데이트 함수 */
   setIsShow: (boolean) => void;
 };
 

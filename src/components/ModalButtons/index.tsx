@@ -4,6 +4,7 @@ import Button from 'components/Button';
 import { useRouter } from 'next/router';
 
 type ModalButtons = {
+  /** 모달 가시 여부 업데이트 함수 */
   setIsShow: (boolean) => void;
 };
 
@@ -56,5 +57,7 @@ const StyledButtonContainer = styled.div`
     margin-left: ${calcRem(20)};
   }
 `;
+
+StyledButtonContainer.displayName = 'StyledButtonContainer';
 
 export default ModalButtons;

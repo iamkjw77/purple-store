@@ -8,7 +8,9 @@ import Icon from 'components/Icon';
 import Button from 'components/Button';
 
 type ProductCardProps = {
+  /** 제품 정보 */
   product: Product;
+  /** 모달 가시 여부 업데이트 함수*/
   setIsShow: (boolean) => void;
 };
 

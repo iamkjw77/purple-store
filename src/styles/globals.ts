@@ -63,22 +63,6 @@ export default createGlobalStyle`
     vertical-align: middle;
   }
 
-  fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  legend {
-    overflow: hidden;
-    position: absolute !important;
-    clip: rect(0, 0, 0, 0);
-    clip-path: polygon(0 0, 0 0, 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-  }
-
   :focus-visible {
     outline: 3px solid #aaa;
   }

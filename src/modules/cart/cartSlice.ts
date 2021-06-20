@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { AddCartType, CartItemType, CartPage, CartPageState, UpdateCartType } from 'types/Cart';
 
 const initialState: CartPageState = {

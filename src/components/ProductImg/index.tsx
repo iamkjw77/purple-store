@@ -23,4 +23,6 @@ const StyledProductImg = styled.div`
   }
 `;
 
+StyledProductImg.displayName = 'StyledProductImg';
+
 export default ProductImg;

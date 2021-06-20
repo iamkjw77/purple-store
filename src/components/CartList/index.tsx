@@ -7,7 +7,9 @@ import CartItem from 'components/CartItem';
 import CartItemPriceInfo from 'components/CartItemPriceInfo';
 
 type CartListProps = {
+  /** 카트 전체 아이템 배열 */
   cartItems: CartItemType[];
+  /** 카트 아이템 전체 갯수 */
   count: number;
 };
 

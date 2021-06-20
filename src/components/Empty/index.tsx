@@ -37,7 +37,15 @@ const StyledEmpty = styled.div`
     width: 95%;
     padding: ${calcRem(30)};
     margin: 0 auto;
+    transition: all 0.2s ease-in;
+  }
+
+  button:hover {
+    background-color: ${colors.light_purple};
+    border: 2px solid ${colors.light_purple};
   }
 `;
+
+StyledEmpty.displayName = 'StyledEmpty';
 
 export default Empty;

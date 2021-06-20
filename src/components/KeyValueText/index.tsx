@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { calcInterval, fontSize } from 'theme';
 
 type KeyValueTextProps = {
+  /** 키 내용 */
   title: string;
+  /** value 내용 */
   value: string | number;
 } & React.HTMLAttributes<HTMLDListElement>;
 
@@ -30,5 +32,7 @@ const StyledKeyValueText = styled.dl`
     font-weight: bold;
   }
 `;
+
+StyledKeyValueText.displayName = 'StyledKeyValueText';
 
 export default KeyValueText;

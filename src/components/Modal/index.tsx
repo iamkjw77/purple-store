@@ -1,3 +1,4 @@
+import React from 'react';
 import ModalOverlay from 'components/ModalOverlay';
 
 type ModalProps = {
@@ -21,4 +22,4 @@ const Modal = ({ children, setIsShow }: ModalProps) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

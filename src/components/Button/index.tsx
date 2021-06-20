@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 
@@ -37,4 +38,4 @@ const ButtonStyle = styled.button<ButtonStyle>`
 
 ButtonStyle.displayName = 'ButtonStyle';
 
-export default Button;
+export default React.memo(Button);

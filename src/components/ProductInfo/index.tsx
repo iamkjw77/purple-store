@@ -1,5 +1,5 @@
 import { updateCartItem } from 'modules/cart/cartSlice';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
@@ -102,4 +102,4 @@ const StyledCountContainer = styled.div`
 StyledProductInfo.displayName = 'StyledProductInfo';
 StyledCountContainer.displayName = 'StyledCountContainer';
 
-export default ProductInfo;
+export default React.memo(ProductInfo);

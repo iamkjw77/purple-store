@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 import { CartItemType } from 'types/Cart';
@@ -69,4 +70,4 @@ const StyledCartItemPriceInfo = styled.div`
 
 StyledCartItemPriceInfo.displayName = 'StyledCartItemPriceInfo';
 
-export default CartItemPriceInfo;
+export default React.memo(CartItemPriceInfo);

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcInterval, fontSize } from 'theme';
 
@@ -35,4 +36,4 @@ const StyledKeyValueText = styled.dl`
 
 StyledKeyValueText.displayName = 'StyledKeyValueText';
 
-export default KeyValueText;
+export default React.memo(KeyValueText);

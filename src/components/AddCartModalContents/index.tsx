@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTypedSelector } from '../../../pages/_app';
 import styled from 'styled-components';
 import { HTMLMotionProps, motion } from 'framer-motion';
@@ -53,4 +54,4 @@ const StyledModal = styled(motion.div)`
 
 StyledModal.displayName = 'StyledModal';
 
-export default AddCartModalContents;
+export default React.memo(AddCartModalContents);

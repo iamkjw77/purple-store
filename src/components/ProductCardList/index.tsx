@@ -32,4 +32,4 @@ const StyledContainer = styled.div`
 
 StyledContainer.displayName = 'StyledContainer';
 
-export default ProductCardList;
+export default React.memo(ProductCardList);

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from 'theme';
 import { HTMLMotionProps, motion } from 'framer-motion';
@@ -24,4 +25,4 @@ const OverlayStyle = styled(motion.div)`
 
 OverlayStyle.displayName = 'OverlayStyle';
 
-export default ModalOverlay;
+export default React.memo(ModalOverlay);

@@ -1,3 +1,4 @@
+import React from 'react';
 import CheckBox from 'components/CheckBox';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -74,4 +75,4 @@ StyledCartItem.displayName = 'StyledCartItem';
 StyledTitleContainer.displayName = 'StyledTitleContainer';
 StyledProductContainer.displayName = 'StyledProductContainer';
 
-export default CartItem;
+export default React.memo(CartItem);

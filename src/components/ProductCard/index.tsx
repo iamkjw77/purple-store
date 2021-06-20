@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { calcInterval, calcRem, colors, fontSize } from 'theme';
@@ -84,4 +85,4 @@ const StyledProductCard = styled.figure`
 
 StyledProductCard.displayName = 'StyledProductCard';
 
-export default ProductCard;
+export default React.memo(ProductCard);

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 import calcBenefit from 'utils/calcBenefit';
@@ -35,4 +36,4 @@ const TooltipContainer = styled.div<TooltipProps>`
 
 TooltipContainer.displayName = 'TooltipContainer';
 
-export default Tooltip;
+export default React.memo(Tooltip);

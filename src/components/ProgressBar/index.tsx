@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 import { calcQuarter } from 'utils/calcQuarter';
@@ -108,4 +109,4 @@ const StyledProgressBarText = styled.div<ProgressBarType>`
 ProgressBarContainer.displayName = 'ProgressBarContainer';
 StyledProgressBarText.displayName = 'StyledProgressBarText';
 
-export default ProgressBar;
+export default React.memo(ProgressBar);

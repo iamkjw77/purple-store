@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { HTMLMotionProps, motion } from 'framer-motion';
 import { calcRem, colors, fontSize } from 'theme';
@@ -44,4 +45,4 @@ const StyledDuplicateModal = styled(motion.div)`
 
 StyledDuplicateModal.displayName = 'StyledDuplicateModal';
 
-export default DuplicateProductModalContents;
+export default React.memo(DuplicateProductModalContents);

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors } from 'theme';
 import Button from 'components/Button';
@@ -60,4 +61,4 @@ const StyledButtonContainer = styled.div`
 
 StyledButtonContainer.displayName = 'StyledButtonContainer';
 
-export default ModalButtons;
+export default React.memo(ModalButtons);

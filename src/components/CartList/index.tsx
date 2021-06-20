@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { calcRem, colors } from 'theme';
 import { CartItemType } from 'types/Cart';
@@ -48,4 +49,4 @@ const StyledCartItemContainer = styled.ul`
 StyledContainer.displayName = 'StyledContainer';
 StyledCartItemContainer.displayName = 'StyledCartItemContainer';
 
-export default CartList;
+export default React.memo(CartList);

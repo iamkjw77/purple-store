@@ -1,3 +1,4 @@
+import React from 'react';
 import Icon from 'components/Icon';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -42,4 +43,4 @@ const StyledButton = styled.button<{ count: number }>`
 
 StyledButton.displayName = 'StyledButton';
 
-export default CartBtn;
+export default React.memo(CartBtn);

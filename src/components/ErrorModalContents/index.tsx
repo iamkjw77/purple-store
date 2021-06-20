@@ -20,7 +20,8 @@ const ErrorModalContents = () => {
       transition={{ type: 'none' }}
       exit={{ opacity: 0 }}
     >
-      <h1>에러가 발생했습니다. 페이지를 새로고침합니다.</h1>
+      <h1>에러가 발생했습니다.</h1>
+      <p>페이지를 새로고침합니다.</p>
       <Button bgColor={colors.purple} color={colors.white} onClick={onReload}>
         새로고침
       </Button>
@@ -40,10 +41,15 @@ const StyledDuplicateModal = styled(motion.div)`
   border-radius: 10px;
   text-align: center;
 
-  h1 {
+  h1,
+  p {
     font-size: ${fontSize.xlarge};
     font-weight: bold;
-    margin-bottom: ${calcRem(100)};
+    margin-bottom: ${calcRem(30)};
+  }
+
+  p {
+    margin-bottom: ${calcRem(50)};
   }
 `;
 

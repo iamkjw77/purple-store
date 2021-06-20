@@ -7,13 +7,13 @@ import Loader from 'components/Loader/index';
 import Modal from 'components/Modal';
 import ErrorModalContents from 'components/ErrorModalContents/index';
 import { useState } from 'react';
+import useStopSroll from 'hooks/useStopSroll';
 
 export default function Cart() {
   const { loading, data, error, count } = useTypedSelector((state) => state.cart);
   const [_, setIsShow] = useState(true);
 
   if (!data || loading) return <Loader />;
-
   return (
     <>
       <Head>

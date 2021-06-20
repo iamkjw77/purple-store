@@ -5,6 +5,7 @@ import { InferGetStaticPropsType } from 'next';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './_app';
 import { clearProducts, initializeProducts } from 'modules/product/productSlice';
+import { AnimatePresence } from 'framer-motion';
 import { ProductPage } from 'types/Product';
 import useStopSroll from 'hooks/useStopSroll';
 import useSrcoll from 'hooks/useSrcoll';
@@ -47,20 +48,26 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
       </Head>
       <ProductCardList products={data} setIsShow={setIsShow} />
       {loading && <Loader />}
-      {isShow && !cartError && (
-        <ModalContainer id="modal">
-          <Modal setIsShow={setIsShow}>
-            <AddCartModalContents setIsShow={setIsShow} />
-          </Modal>
-        </ModalContainer>
-      )}
-      {isShow && cartError === 400 && (
-        <ModalContainer id="modal">
-          <Modal setIsShow={setIsShow}>
-            <DuplicateProductModalContents setIsShow={setIsShow} />
-          </Modal>
-        </ModalContainer>
-      )}
+
+      <AnimatePresence>
+        {isShow && !cartError && (
+          <ModalContainer id="modal">
+            <Modal setIsShow={setIsShow}>
+              <AddCartModalContents setIsShow={setIsShow} />
+            </Modal>
+          </ModalContainer>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isShow && cartError === 400 && (
+          <ModalContainer id="modal">
+            <Modal setIsShow={setIsShow}>
+              <DuplicateProductModalContents setIsShow={setIsShow} />
+            </Modal>
+          </ModalContainer>
+        )}
+      </AnimatePresence>
     </>
   );
 }

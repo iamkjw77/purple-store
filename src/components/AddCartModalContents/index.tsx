@@ -1,5 +1,6 @@
 import { useTypedSelector } from '../../../pages/_app';
 import styled from 'styled-components';
+import { HTMLMotionProps, motion } from 'framer-motion';
 import { calcRem, colors, fontSize } from 'theme';
 import { calcTotalPrice } from 'utils/calcTotalPrice';
 import Tooltip from 'components/Tooltip/index';
@@ -8,14 +9,21 @@ import ModalButtons from 'components/ModalButtons/index';
 
 type AddCartModalContentsProps = {
   setIsShow: (boolean) => void;
-};
+} & HTMLMotionProps<'div'>;
 
 const AddCartModalContents = ({ setIsShow }: AddCartModalContentsProps) => {
   const { data } = useTypedSelector((state) => state.cart);
   const totalPrice = calcTotalPrice(data);
 
   return (
-    <StyledModal role="dialog" aria-modal={true}>
+    <StyledModal
+      role="dialog"
+      aria-modal={true}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ type: 'none' }}
+      exit={{ opacity: 0 }}
+    >
       <h1>정기 배송 장바구니에 담겼습니다.</h1>
       <Tooltip price={totalPrice} />
       <ProgressBar price={totalPrice} />
@@ -24,7 +32,7 @@ const AddCartModalContents = ({ setIsShow }: AddCartModalContentsProps) => {
   );
 };
 
-const StyledModal = styled.div`
+const StyledModal = styled(motion.div)`
   position: fixed;
   top: 50%;
   left: 50%;

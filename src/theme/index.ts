@@ -15,7 +15,9 @@ export const colors = {
   gray: '#f5f5f5',
   darkGray: '#aaa',
   pink: '#fb3a61',
+  light_pink: '#da77f2',
   purple: '#6415b7',
+  light_purple: '#5f3dc4',
 };
 
 export const fontSize = {

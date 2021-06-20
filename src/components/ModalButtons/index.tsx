@@ -17,10 +17,15 @@ const ModalButtons = ({ setIsShow }: ModalButtons) => {
 
   return (
     <StyledButtonContainer>
-      <Button bgColor={colors.white} color={colors.purple} onClick={() => setIsShow(false)}>
+      <Button
+        className="cancle"
+        bgColor={colors.white}
+        color={colors.purple}
+        onClick={() => setIsShow(false)}
+      >
         계속담기
       </Button>
-      <Button bgColor={colors.purple} color={colors.white} onClick={goLink}>
+      <Button className="confirm" bgColor={colors.purple} color={colors.white} onClick={goLink}>
         장바구니 확인
       </Button>
     </StyledButtonContainer>
@@ -31,6 +36,21 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: ${calcRem(120)};
+
+  button {
+    transition: all 0.2s ease-in;
+  }
+
+  .cancle:hover {
+    border: 2px solid ${colors.light_pink};
+    color: ${colors.light_pink};
+  }
+
+  .confirm:hover {
+    opacity: 0.9;
+    background-color: ${colors.light_purple};
+    border: 2px solid ${colors.light_purple};
+  }
 
   button:last-child {
     margin-left: ${calcRem(20)};

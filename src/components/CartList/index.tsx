@@ -1,14 +1,10 @@
 import styled from 'styled-components';
-import { calcInterval, calcRem, colors, fontSize } from 'theme';
+import { calcRem, colors } from 'theme';
+import { CartItemType } from 'types/Cart';
 import Empty from 'components/Empty';
 import ControlBar from 'components/ControlBar';
 import CartItem from 'components/CartItem';
-import { CartItemType } from 'types/Cart';
-import { calcTotalPrice } from 'utils/calcTotalPrice';
-import { numberWithCommas } from 'utils/numberWithCommas';
-import { calcShoppingFee } from 'utils/calcShoppingFee';
-import { calcShippingFeeCondition } from 'utils/calcShippingFeeCondition';
-import { calcTotal } from 'utils/calcTotal';
+import CartItemPriceInfo from 'components/CartItemPriceInfo';
 
 type CartListProps = {
   cartItems: CartItemType[];
@@ -16,98 +12,38 @@ type CartListProps = {
 };
 
 const CartList = ({ cartItems, count }: CartListProps) => {
-  const totalPrice = calcTotalPrice(cartItems);
-  const shippingFee = calcShoppingFee(totalPrice);
-
   return (
-    <Container>
+    <StyledContainer>
       <ControlBar />
       {!count ? (
         <Empty />
       ) : (
         <>
-          <ul>
+          <StyledCartItemContainer>
             {cartItems.map((cartItem) => (
               <CartItem key={cartItem.id} cartItem={cartItem} />
             ))}
-          </ul>
-          <dl>
-            <dt>총 상품가격</dt>
-            <dd>{numberWithCommas(totalPrice)}원</dd>
-          </dl>
-          <dl>
-            <dt>총 배송비</dt>
-            <dd>{numberWithCommas(shippingFee)}원</dd>
-          </dl>
-          <span className="shippingFee-info">
-            ({calcShippingFeeCondition(totalPrice)}원 추가시 무료배송)
-          </span>
-          <dl className="total-container">
-            <dt className="total-title">합계</dt>
-            <dd className="total-price">{calcTotal(totalPrice, shippingFee)}원</dd>
-          </dl>
-          <button className="purchase-btn">구매하기 ({count})</button>
+          </StyledCartItemContainer>
+          <CartItemPriceInfo cartItems={cartItems} count={count} />
         </>
       )}
-    </Container>
+    </StyledContainer>
   );
 };
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   max-width: ${calcRem(768)};
   margin: 0 auto;
   background-color: ${colors.white};
   padding: ${calcRem(30)};
   margin-bottom: ${calcRem(100)};
-
-  .shippingFee-info {
-    display: block;
-    padding: ${calcRem(30)};
-    font-size: ${fontSize.large};
-    text-align: right;
-    color: ${colors.darkGray};
-    border-bottom: 1px solid ${colors.darkGray};
-  }
-  ul {
-    margin-bottom: ${calcRem(40)};
-  }
-
-  dl {
-    font-size: ${fontSize.xlarge};
-    padding: ${calcInterval([20, 30])};
-    display: flex;
-    justify-content: space-between;
-
-    dt,
-    dd {
-      display: inline;
-    }
-
-    dd,
-    .total-title {
-      font-weight: bold;
-    }
-  }
-  .total-container {
-    margin-top: ${calcRem(30)};
-    margin-bottom: ${calcRem(50)};
-
-    .total-price {
-      color: ${colors.purple};
-    }
-  }
-
-  .purchase-btn {
-    display: block;
-    width: 95%;
-    font-size: ${fontSize.large};
-    padding: ${calcRem(30)};
-    margin: 0 auto;
-    font-weight: bold;
-    background-color: ${colors.purple};
-    color: ${colors.white};
-    border-radius: 5px;
-  }
 `;
+
+const StyledCartItemContainer = styled.ul`
+  margin-bottom: ${calcRem(40)};
+`;
+
+StyledContainer.displayName = 'StyledContainer';
+StyledCartItemContainer.displayName = 'StyledCartItemContainer';
 
 export default CartList;

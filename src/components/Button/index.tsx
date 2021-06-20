@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 
 type ButtonProps = {
-  contents: string;
+  children: React.ReactNode;
   bgColor: string;
   color: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -12,10 +12,10 @@ type ButtonStyle = {
   color: string;
 };
 
-const Button = ({ contents, bgColor, color, ...restProps }: ButtonProps) => {
+const Button = ({ children, bgColor, color, ...restProps }: ButtonProps) => {
   return (
     <ButtonStyle bgColor={bgColor} color={color} {...restProps}>
-      {contents}
+      {children}
     </ButtonStyle>
   );
 };

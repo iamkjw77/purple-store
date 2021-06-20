@@ -12,18 +12,18 @@ const CheckBox = ({ label }: CheckBox) => {
   const handleClick = () => setisChecked(!isChecked);
 
   return (
-    <StyledLabel>
+    <StyledCheckBox>
       <input type="checkbox" onChange={handleClick} checked={isChecked} />
       {isChecked ? <Icon name="Unchecked" size={18} /> : <Icon name="Checked" size={18} />}
       {label}
-    </StyledLabel>
+    </StyledCheckBox>
   );
 };
 
-const StyledLabel = styled.label`
+const StyledCheckBox = styled.label`
+  position: relative;
   display: inline-flex;
   align-items: center;
-  position: relative;
   cursor: pointer;
   user-select: none;
   font-size: ${fontSize.large};

@@ -36,6 +36,10 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
             rel="stylesheet"
           />
+          <link
+            rel="shortcut icon"
+            href="https://s3-purplestore.s3.ap-northeast-2.amazonaws.com/assets/favicon.ico"
+          />
         </Head>
         <body>
           <Main />

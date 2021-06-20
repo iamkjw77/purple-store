@@ -1,10 +1,12 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 import { calcRem } from 'theme';
+import spinner from '../../../public/spinner.svg';
 
 const Loader = () => {
   return (
     <StyledLoader>
-      <img src="spinner.svg" alt="로딩중" />
+      <Image src={spinner} alt="로딩중" />
     </StyledLoader>
   );
 };

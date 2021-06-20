@@ -22,7 +22,7 @@ const cartSlice = createSlice({
       state.data = action.payload.results;
       state.count = action.payload.count;
     },
-    getCartItemsError(state: CartPageState, action: PayloadAction<AxiosError>) {
+    getCartItemsError(state: CartPageState, action: PayloadAction<number>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
       state.data = state.data.concat(action.payload);
       state.count = state.count + 1;
     },
-    addCartItemError(state: CartPageState, action: PayloadAction<AxiosError>) {
+    addCartItemError(state: CartPageState, action: PayloadAction<number>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -51,7 +51,7 @@ const cartSlice = createSlice({
         item.id === action.payload.id ? action.payload : item,
       );
     },
-    updateCartItemError(state: CartPageState, action: PayloadAction<AxiosError>) {
+    updateCartItemError(state: CartPageState, action: PayloadAction<number>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -65,7 +65,7 @@ const cartSlice = createSlice({
       state.data = state.data.filter((item) => item.id !== action.payload);
       state.count = state.count - 1;
     },
-    deleteCartItemError(state: CartPageState, action: PayloadAction<AxiosError>) {
+    deleteCartItemError(state: CartPageState, action: PayloadAction<number>) {
       state.loading = false;
       state.error = action.payload;
     },

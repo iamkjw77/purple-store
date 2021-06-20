@@ -1,7 +1,9 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { calcRem, colors, fontSize } from 'theme';
 import Button from 'components/Button/index';
-import { useRouter } from 'next/router';
+import errorImg from '../../../public/error.png';
 
 const Error = () => {
   const router = useRouter();
@@ -12,15 +14,12 @@ const Error = () => {
 
   return (
     <StyledContainer>
-      <img src="error.png" alt="에러 이미지" />
+      <Image src={errorImg} alt="에러 이미지" />
       <p>서비스 이용에 불편을 드려 죄송합니다.</p>
       <p className="text-sub">하루 빨리 조치를 취하겠습니다!</p>
-      <Button
-        contents="새로고침"
-        bgColor={colors.purple}
-        color={colors.white}
-        onClick={handleClick}
-      />
+      <Button bgColor={colors.purple} color={colors.white} onClick={handleClick}>
+        새로고침
+      </Button>
     </StyledContainer>
   );
 };

@@ -23,7 +23,7 @@ function* getCartItemsSaga() {
     const cart: CartPage = yield call(cartAPI.getCartItems);
     yield put(getCartItemsSuccess(cart));
   } catch (error) {
-    yield put(getCartItemsError(error));
+    yield put(getCartItemsError(error.response.status));
   }
 }
 
@@ -33,7 +33,7 @@ function* addItemSaga(action: PayloadAction<AddCartType>) {
     const cartItem: CartItemType = yield call(cartAPI.addCartItem, action.payload);
     yield put(addCartItemSuccess(cartItem));
   } catch (error) {
-    yield put(addCartItemError(error));
+    yield put(addCartItemError(error.response.status));
   }
 }
 
@@ -43,7 +43,7 @@ function* updateItemSaga(action: PayloadAction<UpdateCartType>) {
     const cartItem: CartItemType = yield call(cartAPI.updateCartItem, action.payload);
     yield put(updateCartItemSuccess(cartItem));
   } catch (error) {
-    yield put(updateCartItemError(error));
+    yield put(updateCartItemError(error.response.status));
   }
 }
 
@@ -53,7 +53,7 @@ function* deleteItemSaga(action: PayloadAction<number>) {
     yield call(cartAPI.deleteCartItem, action.payload);
     yield put(deleteCartItemSuccess(action.payload));
   } catch (error) {
-    yield put(deleteCartItemError(error));
+    yield put(deleteCartItemError(error.response.status));
   }
 }
 

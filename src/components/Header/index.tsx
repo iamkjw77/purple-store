@@ -1,12 +1,13 @@
 import Icon from 'components/Icon';
 import styled from 'styled-components';
-import { calcRem, colors } from 'theme';
+import { calcInterval, calcRem, colors } from 'theme';
 import Logo from 'components/Logo';
 import CartBtn from 'components/CartBtn';
 import { useTypedSelector } from '../../../pages/_app';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getCartItems } from 'modules/cart/cartSlice';
+import Button from 'components/Button';
 
 const Header = () => {
   const { count } = useTypedSelector((state) => state.cart);
@@ -14,14 +15,14 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(getCartItems());
-  }, [count]);
+  }, []);
 
   return (
     <HeaderStyle>
       <div>
-        <button className="menu">
+        <Button className="menu" bgColor="transparent" color={colors.black}>
           <Icon name="HamburgerMenu" size={25} />
-        </button>
+        </Button>
         <Logo />
       </div>
       <CartBtn count={count} />
@@ -36,7 +37,7 @@ const HeaderStyle = styled.header`
   max-width: ${calcRem(768)};
   margin: 0 auto;
   background-color: ${colors.white};
-  padding: ${calcRem(30)};
+  padding: ${calcInterval([20, 30, 10])};
 
   div {
     display: flex;
@@ -44,7 +45,9 @@ const HeaderStyle = styled.header`
   }
 
   .menu {
+    width: auto;
     margin-right: ${calcRem(7)};
+    border: none;
   }
 
   h1 {

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { colors } from 'theme';
+import { HTMLMotionProps, motion } from 'framer-motion';
 
 type ModalOverlayProps = {
   setIsShow: (boolean) => void;
-};
+} & HTMLMotionProps<'div'>;
 
 const ModalOverlay = ({ setIsShow }: ModalOverlayProps) => {
   return <OverlayStyle onClick={() => setIsShow(false)} />;
 };
 
-const OverlayStyle = styled.div`
+const OverlayStyle = styled(motion.div)`
   z-index: 100;
   position: fixed;
   width: 100%;

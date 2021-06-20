@@ -1,12 +1,15 @@
 import CheckBox from 'components/CheckBox';
 import styled from 'styled-components';
-import { calcInterval, calcRem, colors, fontSize } from 'theme';
+import { calcInterval, colors, fontSize } from 'theme';
+import Button from 'components/Button';
 
 const ControlBar = () => {
   return (
     <StyledControlBar>
       <CheckBox label="전체선택" />
-      <button>선택삭제</button>
+      <Button bgColor={colors.white} color={colors.darkGray}>
+        선택삭제
+      </Button>
     </StyledControlBar>
   );
 };
@@ -19,12 +22,12 @@ const StyledControlBar = styled.div`
   background-color: ${colors.gray};
 
   button {
+    width: auto;
     font-size: ${fontSize.large};
-    background-color: ${colors.white};
-    padding: ${calcRem(10)};
+    padding: ${calcInterval([10, 10])};
     border-radius: 5px;
-    color: ${colors.darkGray};
     font-weight: bold;
+    border: none;
   }
 
   button:hover {

@@ -2,7 +2,7 @@ import { Product } from 'types/Product';
 
 export type CartPageState = {
   loading: boolean;
-  error: Error | null;
+  error: number | null;
   data: CartItemType[] | null;
   count: number;
 };

@@ -1,18 +1,20 @@
-import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import ProductCardList from 'components/ProductCardList/index';
-import { clearProducts, initializeProducts } from 'modules/product/productSlice';
-import { useTypedSelector } from './_app';
-import Loader from 'components/Loader';
-import Error from 'components/Error/index';
-import Modal from 'components/Modal/index';
-import ModalContainer from 'utils/portal';
 import axios from 'axios';
-import { ProductPage } from 'types/Product';
+import Head from 'next/head';
 import { InferGetStaticPropsType } from 'next';
-import useSrcoll from 'hooks/useSrcoll';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from './_app';
+import { clearProducts, initializeProducts } from 'modules/product/productSlice';
+import { ProductPage } from 'types/Product';
 import useStopSroll from 'hooks/useStopSroll';
+import useSrcoll from 'hooks/useSrcoll';
+import ModalContainer from 'utils/portal';
+import ProductCardList from 'components/ProductCardList';
+import Loader from 'components/Loader';
+import Error from 'components/Error';
+import Modal from 'components/Modal';
+import AddCartModalContents from 'components/AddCartModalContents';
+import DuplicateProductModalContents from 'components/DuplicateProductModalContents';
 
 export default function Home({ products }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { loading, data, error: productError } = useTypedSelector((state) => state.product);
@@ -35,7 +37,7 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
   }, []);
 
   if (!data) return <Loader />;
-  if (productError || cartError) return <Error />;
+  if (productError || cartError === 500) return <Error />;
 
   return (
     <>
@@ -45,9 +47,18 @@ export default function Home({ products }: InferGetStaticPropsType<typeof getSta
       </Head>
       <ProductCardList products={data} setIsShow={setIsShow} />
       {loading && <Loader />}
-      {isShow && (
+      {isShow && !cartError && (
         <ModalContainer id="modal">
-          <Modal setIsShow={setIsShow} />
+          <Modal setIsShow={setIsShow}>
+            <AddCartModalContents setIsShow={setIsShow} />
+          </Modal>
+        </ModalContainer>
+      )}
+      {isShow && cartError === 400 && (
+        <ModalContainer id="modal">
+          <Modal setIsShow={setIsShow}>
+            <DuplicateProductModalContents setIsShow={setIsShow} />
+          </Modal>
         </ModalContainer>
       )}
     </>

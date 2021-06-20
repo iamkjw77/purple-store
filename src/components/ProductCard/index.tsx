@@ -1,12 +1,11 @@
-// import { addCartItem } from 'apis/cart';
-import Icon from 'components/Icon';
-import { getCartItems } from 'modules/cart/cartSlice';
-import { addCartItem } from 'modules/cart/cartSlice';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { calcInterval, calcRem, colors, fontSize } from 'theme';
+import { addCartItem } from 'modules/cart/cartSlice';
 import { Product } from 'types/Product';
 import { numberWithCommas } from 'utils/numberWithCommas';
+import Icon from 'components/Icon';
+import Button from 'components/Button';
 
 type ProductCardProps = {
   product: Product;
@@ -16,28 +15,28 @@ type ProductCardProps = {
 const ProductCard = ({ product, setIsShow }: ProductCardProps) => {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const onAddItem = () => {
     setIsShow(true);
     dispatch(addCartItem({ pog: product.id, qty: 1 }));
   };
 
   return (
     <>
-      <StyledFigure>
+      <StyledProductCard>
         <div>
           <img src={product.image} alt={product.name} />
-          <button className="cart" onClick={handleClick}>
+          <Button bgColor={colors.white} color={colors.purple} onClick={onAddItem}>
             <Icon name="ShoppingCart" size={30} />
-          </button>
+          </Button>
         </div>
         <figcaption>{product.name}</figcaption>
         <span>{numberWithCommas(product.price)}원</span>
-      </StyledFigure>
+      </StyledProductCard>
     </>
   );
 };
 
-const StyledFigure = styled.figure`
+const StyledProductCard = styled.figure`
   font-size: ${fontSize.large};
   margin-bottom: ${calcRem(50)};
 
@@ -70,16 +69,17 @@ const StyledFigure = styled.figure`
     margin-top: ${calcRem(30)};
   }
 
-  .cart {
+  button {
     position: absolute;
+    width: auto;
     bottom: 15px;
     right: 10px;
-    color: ${colors.purple};
-    background-color: ${colors.white};
     border-radius: 50%;
-    padding: ${calcRem(10)};
+    padding: ${calcInterval([10, 15])};
     border: 2px solid ${colors.purple};
   }
 `;
+
+StyledProductCard.displayName = 'StyledProductCard';
 
 export default ProductCard;

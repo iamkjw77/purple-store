@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import Icon from 'components/Icon';
 import { calcRem, colors, fontSize } from 'theme';
 import { calcQuarter } from 'utils/calcQuarter';
 import { make05IconName, make10IconName, make20IconName } from 'utils/makeName';
+import Icon from 'components/Icon';
 
 type ProgressBarType = {
   price: number;
@@ -13,7 +13,7 @@ const ProgressBar = ({ price }: ProgressBarType) => {
     <ProgressBarContainer price={price}>
       <span className="basic-progress"></span>
 
-      {Array.from({ length: calcQuarter(price) }).map((item, i) => (
+      {Array.from({ length: calcQuarter(price) }).map((_, i) => (
         <span key={i} className="active"></span>
       ))}
 
@@ -22,17 +22,17 @@ const ProgressBar = ({ price }: ProgressBarType) => {
       <Icon className="icon-10" name={make10IconName(price).icon} size={25} />
       <Icon className="icon-20" name={make20IconName(price).icon} size={25} />
 
-      <div className="progressBar-text">
+      <StyledProgressBarText price={price}>
         <span className="text-basic">기본 5%↓</span>
         <span className="text-05">5만원 10%↓</span>
         <span className="text-10">10만원 13%↓</span>
         <span className="text-20">20만원 15%↓</span>
-      </div>
+      </StyledProgressBarText>
     </ProgressBarContainer>
   );
 };
 
-const ProgressBarContainer = styled.div<{ price: number }>`
+const ProgressBarContainer = styled.div<ProgressBarType>`
   position: relative;
   width: ${calcRem(550)};
   height: ${calcRem(20)};
@@ -51,7 +51,6 @@ const ProgressBarContainer = styled.div<{ price: number }>`
     left: 60px;
     color: ${colors.purple};
   }
-
   .icon-05 {
     left: 140px;
     color: ${({ price }) => make05IconName(price).color};
@@ -80,30 +79,32 @@ const ProgressBarContainer = styled.div<{ price: number }>`
     background-color: ${colors.purple};
     border: 1px solid ${colors.purple};
   }
+`;
 
-  .progressBar-text {
-    display: flex;
-    justify-content: space-between;
-    font-size: ${fontSize.base};
-    font-weight: bold;
-    margin-left: ${calcRem(45)};
-    margin-top: ${calcRem(20)};
-    color: ${colors.darkGray};
+const StyledProgressBarText = styled.div<ProgressBarType>`
+  display: flex;
+  justify-content: space-between;
+  font-size: ${fontSize.base};
+  font-weight: bold;
+  margin-left: ${calcRem(45)};
+  margin-top: ${calcRem(20)};
+  color: ${colors.darkGray};
 
-    .text-basic {
-      color: ${colors.purple};
-    }
-
-    .text-05 {
-      color: ${({ price }) => make05IconName(price).text};
-    }
-    .text-10 {
-      color: ${({ price }) => make10IconName(price).text};
-    }
-    .text-20 {
-      color: ${({ price }) => make20IconName(price).text};
-    }
+  .text-basic {
+    color: ${colors.purple};
+  }
+  .text-05 {
+    color: ${({ price }) => make05IconName(price).text};
+  }
+  .text-10 {
+    color: ${({ price }) => make10IconName(price).text};
+  }
+  .text-20 {
+    color: ${({ price }) => make20IconName(price).text};
   }
 `;
+
+ProgressBarContainer.displayName = 'ProgressBarContainer';
+StyledProgressBarText.displayName = 'StyledProgressBarText';
 
 export default ProgressBar;
